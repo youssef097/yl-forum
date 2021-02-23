@@ -1,0 +1,31 @@
+{
+  "name": "yl-forum",
+  "version": "1.0.0",
+  "description": "Proyecto final de DAW",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon src/index.js",
+    "client": "npm start --prefix client",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youssef097/yl-forum.git"
+  },
+  "author": "Youssef Lehchiki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/youssef097/yl-forum/issues"
+  },
+  "homepage": "https://github.com/youssef097/yl-forum#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^6.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.7",
+    "sequelize": "^6.5.0"
+  }
+}
