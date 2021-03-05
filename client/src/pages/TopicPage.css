@@ -1,0 +1,43 @@
+.topic-page{
+    width: 100%;
+    max-width:799px ;    
+    margin: auto;
+    margin-top: 1em;
+}
+.topic-page .banner{
+    width: 100%;
+    height: 12em;
+    background-repeat: no-repeat;   
+    background-position-y:50% ;
+    background-size:cover;
+}
+
+
+.topic-page .topic-info{
+    gap: 1em;
+    background: white;
+    display: flex;    
+    position: relative;
+    padding: 0 2em;
+}
+
+.topic-page .topic-info  img{
+    border: 5px solid rgb(61, 255, 126);
+    /* position: absolute; */
+    transform: translateY(-50%);
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+}
+.topic-page .topic-info> div{
+    /* background: red; */
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+.topic-page .topic-info  button{
+    /* position: absolute; */
+    /* right: 0; */
+
+}

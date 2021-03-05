@@ -1,38 +1,326 @@
-.App {
-  text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {}
+
+iframe {
+    width: 100%;
+    max-width: 640px;
+    height: 100%;
+    background-color: white;
+    height: 360px;
+    margin: auto !important;
+    /* margin-left: 4em; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #333;
+    background-image: url("http://localhost:3001/api/img/a.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    /* filter: blur(4px); */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.glass{
+    background-color: rgba(255, 255, 255, .50);
+    border: 1px solid white;
+    border-radius: .3em;
+
 }
 
-.App-link {
-  color: #61dafb;
+
+#root {
+    display: block;
+    /* background: red; */
+    /* background-color: rgba(255, 255, 255, .4); */
+    /* backdrop-filter: blur(1rem); */
+    position: absolute;
+
+    /* top: 0px; */
+    min-width: 100%;
+    min-height: 100%;
+    /* left: 0px; */
+
+    /* z-index: 123; */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-container{
+    display: flex;
+    /* background: red; */
+    height: 80vh;
+}
+.form-container > *{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    padding: 2em;
+    border-radius: .3em;
+    background: rgba(255, 255, 255, .80);
+}
+
+nav {
+    /* border-radius:0 1em .3em; */
+    position: sticky;
+    top: 0;
+    /* background: rgba(54, 255, 155); */
+    background: whitesmoke;
+    /* backdrop-filter: blur(2rem); */
+    display: flex;
+    min-width: 80vh;
+    align-items: center;
+    justify-content: space-between;
+    padding: .3em 2em;
+    /* position: relative; */
+
+}
+.navbar-left{
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+nav a {
+    text-decoration: none;    
+}
+
+.dropdown{
+    height: 2.5em;
+    width: 12em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid;
+    padding: .1em;
+    border-radius: .2em;
+    cursor: pointer;
+    position: relative;
+    /* background: red; */
+}
+.user-dropdown{
+    /* background: pink; */
+    display: flex;
+    gap: .4em;
+}
+
+.dropdown-menu{
+    position: absolute;
+
+    z-index: 999;
+    background: whitesmoke;
+    padding: 1em;
+    height:200px;
+    width: 100%;    
+    top: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    right: 0px;
+}   
+
+.dropdown-menu button{    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: .4em;
+    cursor: pointer;
+    /* flex-direction: column; */
+}
+
+main {
+    width: 100%;
+    max-width: 1600px;
+    /* border: 1px solid gray;     */
+    margin: auto;
+    /* background: rgba(255, 255, 255, .4) ; */
+    /* opacity: .5; */
+}
+
+aside {
+    /* position: -webkit-sticky; */
+    /* background: #000; */
+    height: 80vh;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 4em;
+}
+
+
+
+.loading {
+    margin: auto;
+    height: 100%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 6px solid transparent;
+    border-bottom: 6px solid black;
+    animation: .5s rotation linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* SIDEBAR - MY PROFLE  */
+.my-profile {
+    /* border: 2px solid salmon;   */
+    border-radius: .3em;
+    border: solid white 1px;
+    background: rgba(255, 255, 255, .50);
+
+}
+
+aside .user-name {
+    color: blue;
+    font-weight: bold;
+    margin-left: 5em;
+}
+
+aside .profile-image {
+    position: absolute;
+    width: 50px;
+    transform: translate(20px, -30px);
+}
+
+aside .user-followers {
+    height: 5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+aside .user-followers>div {
+    text-align: center;
+}
+
+.my-profile .banner {
+    width: 100%;
+}
+
+.my-profile .user-data {
+    padding: .5em;
+    height: 100%;
+    width: 100%;
+}
+
+.my-profile .user-followers {
+    position: relative;
+    display: flex;
+}
+
+.edit-profile-button {
+    position: absolute;
+    /* color: white; */
+    bottom: .5em;
+    right: 1em;
+    /* background: blue; */
+}
+
+.suggested-friends {
+
+    /* border: 1px solid; */
+    /* background: blue; */
+    display: flex;
+    background: rgba(255, 255, 255, .50);
+    border: 1px solid white;
+    border-radius: .2em;
+
+    flex-direction: column;
+    /* gap: .3em; */
+
+}
+
+.suggested-friends .card-header {
+    /* background: gray; */
+    padding: .3em;
+}
+
+.suggested-friends .card-body {
+    padding: .5em;
+    display: flex;
+    flex-direction: column;
+    gap: .3em;
+}
+
+.suggested-friends button {
+    cursor: pointer;
+    border: none;
+    color: #333;
+    padding: .3em;
+    border-radius: .3em;
+    background: rgb(134, 154, 211);
+}
+
+.suggested-friends .danger {
+    background: rgb(236, 138, 138);
+}
+
+.suggested-friends .card-body>div {
+    width: 100%;
+    background: rgba(255, 255, 255, .50);
+    border-radius: .3em;
+
+    height: 3em;
+    /* border: 1px solid gray; */
+    padding: .3em;
+    display: flex;
+    gap: .7em;
+}
+
+.bold {
+    font-weight: 700;
+    color: steelblue;
+    cursor: pointer;
+
+}
+
+
+
+.your-topics{
+    display: block;
+    /* z-index: -1; */
+    position: initial;
+}
+
+.your-topics > div {
+    width: 100%;
+    /* z-index: 2323; */
+    background-color: rgba(255, 255, 255, .50);
+}
+
+
+.home {
+    padding: 1em;
+    display: flex;
+    gap: 1em;
+    justify-content: stretch;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    aside {
+        display: none;
+    }
+
+    .post-list-container {
+        width: 100% !important;
+    }
 }

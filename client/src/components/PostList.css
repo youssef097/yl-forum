@@ -1,0 +1,73 @@
+.post-list-container{
+    /* border: 1px solid gray; */
+    border-radius: .3em;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background: rgba(255, 255, 255, .50);
+    padding: 1em;
+}
+.new-post-input{
+    background: rgba(255, 255, 255, .50);
+    border: 1px solid white;
+    border-radius: .2em;
+    height: 3em;
+    /* background: tomato; */
+    padding: .2em;
+    display: flex;
+    justify-content: space-between;
+}
+.post-text{
+    margin-top:  .6em;
+}
+.new-post-input input{    
+    height: 100%;
+    width: 90%;
+    border:none;
+    border-radius: .3em;
+    padding: .6em;
+}
+.new-post-input input:hover{
+    border: 1px solid blue;    
+}
+
+
+.order-by{
+    background: rgba(255, 255, 255, .50);
+    border: 1px solid white;
+    border-radius: .2em;
+    display: flex;
+    padding: .3em;
+    flex-direction: row;
+    gap: 2em;
+    /* padding: 0 1em; */
+}
+.order-by >button{
+    border-radius: .3em;
+    background: rgba(54, 255, 155);
+    cursor: pointer;
+    border: 1px solid white;
+    padding: .4em;
+}
+.post-list{
+    /* background: steelblue; */
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.post{
+    /* border: 1px solid gray; 
+    */
+    /* padding: .3em; */
+    border: 1px solid white;
+    border-radius: .3em;
+    cursor: pointer;
+    background: rgba(255, 255, 255, .50);
+    padding: .6em;
+}
+.post:hover{
+    /* border: 1px solid black; */
+
+}
