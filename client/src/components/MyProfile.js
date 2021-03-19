@@ -24,7 +24,7 @@ export default function MyProfile({ user }) {
                                 <span>followers</span>
                             </div>
                             <div>
-                                <h3>{0}</h3>
+                                <h3>{user.posts}</h3>
                                 <span>posts</span>
                             </div>
                             <button className="edit-profile-button">Edit Profile</button>

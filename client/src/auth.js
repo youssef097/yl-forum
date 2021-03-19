@@ -8,6 +8,7 @@ export function initAxiosInterceptors(){
         return config
     })
 }
+
 export function deleteToken(){
     return localStorage.removeItem("token")
 }
@@ -20,5 +21,7 @@ export function setToken(token){
 export function isAuth(){
     if(getToken()){
         return true;
+    }else{
+        return false;
     }
 }

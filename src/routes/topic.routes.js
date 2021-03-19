@@ -4,7 +4,8 @@ const topicController = require("../controllers/topic.controller.js")
 const auth = require("../auth");
 const path = require("path")
 const multer = require("multer");
-const uuid = require("uuid")
+const uuid = require("uuid");
+const optionalAuth = require("../optionalAuth.js");
 // const storage = multer.diskStorage({
 //     destination: (req, file, cb) => {
 //         cb(null, "uploads/")
@@ -29,15 +30,17 @@ const uploadImage = multer({
 });
 
 router.get("/topic/my-topics", auth, topicController.getMyTopics)
-router.get("/topic/join/:id", auth, topicController.joinTopic)
-router.get("/topic/getTopic/:id", topicController.getTopic)
+router.get("/topic/subscribed-topics", optionalAuth, topicController.getSubscribedTopics)
+
+router.post("/topic/join/:id", auth, topicController.joinTopic)
+router.post("/topic/disjoin/:id", auth, topicController.disjoinTopic)
+
+
+router.get("/topic/getTopic/:id",optionalAuth, topicController.getTopic)
+// router.get("/topic/getTopic-noAuth/:id", topicController.getTopic)
 router.get("/topic/explore", auth, topicController.explore)
 router.post("/topic/create", auth, uploadImage.any(), topicController.createTopic)
 
-// router.post("/upload-img",uploadImage.any(),  (req, res) => {  
 
-   
-//     res.send("ok")
-// })
 
 module.exports = router;

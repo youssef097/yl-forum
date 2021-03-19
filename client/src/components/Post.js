@@ -1,22 +1,30 @@
 import React from 'react'
-import {Link} from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import parser from "html-react-parser"
 import m from "moment"
 
-export default function Post({postData}) {
-    console.log(postData);
+export default function Post({ postData,maxHeight }) {
+    console.log(maxHeight);
     return (
-        <div className="post">
-            <div>
-                <img width="30px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Sport_balls.svg/200px-Sport_balls.svg.png" alt=""/>
-                <Link to={"/topic/"+postData.t_id}><b>{postData.title}</b></Link>
+        <div className="post" style={{maxHeight:maxHeight?"500px":"none"}} onClick={()=>{}} >
+            <div className="post-header glass">
+                <Link to={"/topic/" + postData.t_id}><img width="30px" height="30px" style={{ borderRadius: "50%", border: "2px solid rgba(54, 255, 155)" }} src={postData.t_img !== "null" ? "/api/uploads/" + postData.t_img : "/api/img/no-photo-topic.PNG"} alt="" /></Link>
+                <Link to={"/topic/" + postData.t_id}><b>{postData.title}</b></Link>
                 <small>
-                    Published by <Link to={"/user/"+postData.u_id} > {postData.u_name} </Link> 
+                    Published by <Link to={"/user/" + postData.u_id} > {postData.u_name} </Link>
                     {m(postData).fromNow()}
                 </small>
             </div>
-            <div className="post-content">                
+            <div className="post-content">
                 <div className="post-text">{parser(postData.text)}</div>
+            </div>
+            <div>
+                {/* <i class="fas fa-heart"></i>  */}
+                <i class="far fa-heart"></i>
+                {postData.likes} 
+                <i class="fas fa-comment-alt"></i> 
+                {postData.comments} 
+                <Link  to={`/post/${postData.id}`}> <button>View more</button> </Link>
             </div>
         </div>
     )

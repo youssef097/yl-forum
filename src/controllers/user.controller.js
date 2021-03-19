@@ -7,43 +7,103 @@ dotenv.config();
 
 const userController = {
     getAllUsers: (req, res) => {
-        User.getAllUsers((err, users) => {
-            // Una vez tengo los users
-            if (users) {
-                let mutaded = users.map((u, i) => {
-                    User.isFollowed(req.user.id, u.id, (err, isFwd) => {
-                        u.pass = undefined;
-                        if (err || !isFwd.length) {
-                            u.isFollowed = false
-                        } else {
-                            u.isFollowed = true
-                        }
-                        if (i == users.length - 1) {
-                            res.status(200).json({ users: users })
-                        }
-                    })
-                })
+        let myId = req.user? req.user.id : null; 
+
+        User.getAllUsers(myId, (err, users) => {
+            // Una vez tengo los 
+            if(err){
+                console.log(err);
+
+            }else{
+                        
+                // users.map((u, i) => {
+                //     User.isFollowed(req.user.id, u.id, (err, isFwd) => {
+                //         u.pass = undefined;
+                //         if (err || !isFwd.length) {
+                //             u.isFollowed = false
+                //         } else {
+                //             u.isFollowed = true
+                //         }
+                //         if (i == users.length - 1) {
+                //         }
+                //     })
+                // })
+                // console.log(users);
+                // console.log(users);
+                // users.map((e)=>{
+
+                //     console.log("is followed", e.isFollowed);
+                //     console.log("is Friend", e.isFriend);
+                // })
+                // let notification = new Notification(req.user.id "")
+                res.status(200).json({ users: users })
             }
         })
+    },
+    acceptFriendRequest:(req,res)=>{
+        User.acceptFriendRequest (req.user.id, req.params.id,  (error, result) => {
+            if (error) return res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
+            res.status(200).json({ "SUCCESS": "Friend requestAccepted" })
+        })
+    },
 
+    cancelFriendRequest:(req,res)=>{
+        User.cancelFriendRequest(req.user.id,req.params.id,(err,result)=>{
+            if(!err){
+                console.log(err);
+                res.status(500).json({ "ERR": "Friend requestAccepted" })
+
+            }else{
+                res.status(200).json({ "SUCCESS": "Friend requestAccepted" })
+            }
+        })
+    },
+
+    getFriends: (req, res) => {
+        let { id } = req.user
+        User.getFriends(id, (error, result) => {
+            if (error) return res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
+            res.status(200).json({ users: result })
+        })
     },
     getFollows: (req, res) => {
         let { id } = req.user
         User.getFollows(id, (error, result) => {
             if (error) return res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
 
-
             res.status(200).json({ users: result })
         })
     },
     getUser: (req, res) => {
+        console.log("llamado");
         let { id } = req.params;
-        User.getUserById(id, (err, result) => {
+        let myId = req.user? req.user.id : null; 
+        User.getUserById(id,  myId, (err, result) => {
+            let u = result[0]
             if (err || !result[0]) {
+                console.log(err);
                 res.status(404).json({ ERROR: "Could not find user with ID " + id })
             } else {
+                // result[0].pass = undefined;
+                // if(!req.user){
+                //     console.log("paso 2");
+                //     res.status(200).json({ user: u })
+                // }else{
+                //     console.log("paso 3");
+                //     User.isFollowed(req.user.id, id, (err, isFwd) => {
+                //         // u.pass = undefined;
+                //         console.log(err);
+                //         if (err || !isFwd.length) {
+                //             u.isFollowed = false
+                //         } else {
+                //             u.isFollowed = true
+                //         }
+                //         console.log(u);
+                //         res.status(200).json({ user: u })
+                //     })
+                // }
+                // console.log("paso 232");
                 if (result[0]) {
-                    result[0].pass = undefined;
                     res.status(200).json({ user: result[0] })
                 }
             }
@@ -115,13 +175,29 @@ const userController = {
 
 
         User.follow(from, to, (error, result) => {
-            if (error) {                
-                res.status(500).json({ ERROR: error.code, message: error.sqlMessage })                
+            if (error) {
+                res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
             } else {
                 res.status(200).json({ SUCCESS: "You followed " + to + " successfully" })
             }
         })
     },
+
+    sendFriendRequest: (req, res) => {
+        const from = req.user.id;
+        const to = req.params.id;
+        if (!from || !to || from == to) return res.status(500).json({ ERROR: "Couldnt add friend " })
+
+
+        User.sendFriendRequest(from, to, (error, result) => {
+            if (error) {
+                res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
+            } else {
+                res.status(200).json({ SUCCESS: "You added friend  " + to + " successfully" })
+            }
+        })
+    },
+    
     unfollow: (req, res) => {
         User.unfollow(req.user.id, req.params.id, (err, resul) => {
             if (err) {
@@ -134,26 +210,26 @@ const userController = {
 
     updateProfile: (req, res) => {
         let newProfile = "myNewProfile.png"
-User.updateField("profile", newProfile, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
-    if (error) {
-        res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
-    } else {
-        res.status(200).json({ SUCCESS: "Updated profile image succesfully" })
+        User.updateField("profile", newProfile, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
+            if (error) {
+                res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
+            } else {
+                res.status(200).json({ SUCCESS: "Updated profile image succesfully" })
 
-    }
-})
+            }
+        })
     },
-updateBanner: (req, res) => {
-    let newBanner = "myNewBanner.png"
-    User.updateField("banner", newBanner, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
-        if (error) {
-            res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
-        } else {
-            res.status(200).json({ SUCCESS: "Updated Pro image succesfully" })
+    updateBanner: (req, res) => {
+        let newBanner = "myNewBanner.png"
+        User.updateField("banner", newBanner, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
+            if (error) {
+                res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
+            } else {
+                res.status(200).json({ SUCCESS: "Updated Pro image succesfully" })
 
-        }
-    })
-},
+            }
+        })
+    },
     updateBio: (req, res) => {
         let newBio = "Im from callosica del segura"
         User.updateField("bio", newBio, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
@@ -164,15 +240,36 @@ updateBanner: (req, res) => {
             }
         })
     },
-        updateUbication: (req, res) => {
-            let newUbication = "Australia"
-            User.updateField("ubication", newUbication, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
-                if (error) {
-                    res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
-                } else {
-                    res.status(200).json({ SUCCESS: "Updated ubication succesfully" })
-                }
-            })
-        }
+    updateUbication: (req, res) => {
+        let newUbication = "Australia"
+        User.updateField("ubication", newUbication, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
+            if (error) {
+                res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
+            } else {
+                res.status(200).json({ SUCCESS: "Updated ubication succesfully" })
+            }
+        })
+    },
+    getReceivedFriendRequests:(req,res)=>{
+        User.getReceivedFriendRequests(req.user.id,(err,requests)=>{
+            if (err) {
+                res.status(500).json({ ERROR: err.code, message: err.sqlMessage })
+            } else {
+                console.log(requests);
+                res.status(200).json({ requests })
+            }
+        })
+    },
+
+    getSentFriendRequests:(req,res)=>{
+        User.getSentFriendRequests(req.user.id,(err,requests)=>{
+            if (err) {
+                res.status(500).json({ ERROR: err.code, message: err.sqlMessage })
+            } else {
+                console.log(requests);
+                res.status(200).json({ requests })
+            }
+        })
+    }
 }
 module.exports = userController;

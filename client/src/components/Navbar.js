@@ -16,8 +16,9 @@ export default function Navbar(props) {
   return (
     <nav>
       <div className="navbar-left">
-        <Link to="/"> <h1>Welcome </h1></Link>
-        <Link to="/explore"><i class="far fa-compass"></i> Explore</Link>
+        <Link to="/home"> <h1>Welcome </h1></Link>
+        {user&&<Link to="/explore"><i class="fas fa-compass"></i> Explore</Link>}
+        {user&&<Link to="/explore"><i class="fas fa-bell"></i> Notifications</Link>}
       </div>
 
       {/* <div class="navbar-search">

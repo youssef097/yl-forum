@@ -13,6 +13,8 @@ import Publish from './pages/Publish';
 import CreateTopic from './pages/CreateTopic';
 import ExplorePage from './pages/ExplorePage';
 import TopicPage from './pages/TopicPage';
+import ProfilePage from './pages/ProfilePage';
+import PostPage from './pages/PostPage';
 
 
 function App() {
@@ -40,14 +42,15 @@ function App() {
       <Fragment>
         <Navbar updateUser={() => fetchUser()} user={user} />
         <main>
-
           <Route path="/login" component={LoginPage} exact />
           <Route path="/register" component={RegisterPage} exact />
           <Route path="/" component={RegisterPage} exact />
           <ProtectedRoute component={Publish} user={user} path="/publish" />          
           <ProtectedRoute component={CreateTopic} user={user} path="/create-topic" />
           <ProtectedRoute component={ExplorePage} user={user} path="/explore" />
+          <Route path="/user/:id" component={ProfilePage} exact />
           <Route path="/topic/:id" component={TopicPage} />
+          <Route path="/post/:id" component={PostPage} />
           <Route path="/home" component={(props) => <HomePage {...props} user={user} updateUser={() => fetchUser()} exact />} />
         </main>
       </Fragment>

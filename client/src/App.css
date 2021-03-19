@@ -4,8 +4,10 @@
     box-sizing: border-box;
 }
 
-body {}
-
+a{
+    text-decoration: none;
+    color: inherit;
+}
 iframe {
     width: 100%;
     max-width: 640px;
@@ -54,6 +56,10 @@ body {
     /* background: red; */
     height: 80vh;
 }
+.select-topic-publish {
+    display: flex;
+    flex-direction: row-reverse;
+}
 .form-container > *{
     display: flex;
     flex-direction: column;
@@ -63,7 +69,22 @@ body {
     border-radius: .3em;
     background: rgba(255, 255, 255, .80);
 }
-
+.your-topics-buttons {
+    padding: .5em;
+    align-items: center;    
+    display: flex;
+    flex-direction: column;
+}
+.your-topics a{
+    width: 100%;
+}
+.your-topics-buttons button{
+    padding: .3em;
+    background: rgb(134, 154, 211);
+    border: none;
+    border-radius: .3em;
+    width: 100%;
+}
 nav {
     /* border-radius:0 1em .3em; */
     position: sticky;
@@ -78,6 +99,10 @@ nav {
     padding: .3em 2em;
     /* position: relative; */
 
+}
+nav img{
+    border-radius: 50%;
+    border:2px solid rgba(54, 255, 155);
 }
 .navbar-left{
     display: flex;
@@ -195,6 +220,8 @@ aside .user-name {
 }
 
 aside .profile-image {
+    border-radius: 50%;
+    border: 2px solid #333;
     position: absolute;
     width: 50px;
     transform: translate(20px, -30px);
@@ -285,6 +312,11 @@ aside .user-followers>div {
     gap: .7em;
 }
 
+.suggested-friends img{
+    border-radius: 50%;
+    border: 2px solid rgba(54, 255, 155);
+}
+
 .bold {
     font-weight: 700;
     color: steelblue;
@@ -301,11 +333,30 @@ aside .user-followers>div {
 }
 
 .your-topics > div {
-    width: 100%;
-    /* z-index: 2323; */
+    border: 1px solid white;
+    border-radius: .3em;
+    padding: .4em;
+    width: 100%;    
     background-color: rgba(255, 255, 255, .50);
 }
+.your-topics-header{    
+}
 
+.your-topics-body{
+    padding: .2em;
+    display: flex;
+    flex-direction: column;
+    gap: .3em;
+}
+
+.your-topics .topic{
+    height: 3.5em;
+}
+
+.your-topics .topic-name{
+    color: blue;
+    font-weight: 600;    
+}
 
 .home {
     padding: 1em;
@@ -314,12 +365,53 @@ aside .user-followers>div {
     justify-content: stretch;
     justify-content: center;
 }
+.topic{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    align-items: center;
+    /* height: 4em; */
+}
+.topic img{
+    display: block;
+    height: 3em;
+    width: 3em;
+}
+.rdw-editor-main{
+    padding: 0 1em;
+}
+
+.chat{
+    width: 25%;
+    position: fixed;
+    right: 8%;
+    padding: 1em;
+    /* width: 2em; */
+    bottom: 1em;
+    cursor: pointer;
+}
+.chat-body{
+    height: 20em;
+    /* background: white; */
+    display: flex;
+}
+.chat-friends{
+    background:gray;
+    width: 30%;
+}
+.messages{
+    background: red;
+    width: 70%;
+}
+/* .chat-body  */
 
 @media (max-width: 600px) {
     aside {
+        display: none !important;
+    }
+    nav .dropdown{
         display: none;
     }
-
     .post-list-container {
         width: 100% !important;
     }

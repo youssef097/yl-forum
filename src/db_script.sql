@@ -49,16 +49,18 @@ CREATE TABLE IF NOT EXISTS post(
 CREATE TABLE IF NOT EXISTS comment(  
     id varchar(100) NOT NULL UNIQUE,        
     user_id varchar(100) NOT NULL,
-    post_id varchar(100) not NULL,
+    post_id varchar(100) default NULL,   
+    comment_id varchar(100) default NULL,
     text varchar(1000),
     FOREIGN KEY (user_id) references user(id),
-    FOREIGN KEY (post_id) references post(id),
+    -- FOREIGN KEY (post_id) references post(id),
+    -- FOREIGN KEY (comment_id) references comment(id),
     PRIMARY KEY (id)          
 );
 
 
 
--- RELATIONS
+-- RELATIONSHIPS
 CREATE TABLE IF NOT EXISTS follows(          
     user_id varchar(100) NOT NULL,
     followed_id varchar(100) NOT NULL,

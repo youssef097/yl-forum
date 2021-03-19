@@ -11,13 +11,10 @@ export default function CreateTopic() {
         // console.log(img);
         // console.log(banner);
     })
+
     let formData = new FormData()
 
     function handleSubmit(e) {
-        // e.preventDefault()
-        // let f = document.getElementById("form")
-
-
 
         formData.append("title", name)
         formData.append("desc", desc)
