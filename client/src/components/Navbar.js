@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
+import Notifications from "./Notifications"
 import { deleteToken } from '../auth'
 export default function Navbar(props) {
   const [user, setUser] = useState(props.user)
   const [options, setOptions] = useState(false)
+
   useEffect(() => {
     setUser(props.user)
   }, [props])
@@ -12,13 +14,15 @@ export default function Navbar(props) {
     deleteToken()
     props.updateUser()
   }
+  
 
   return (
     <nav>
       <div className="navbar-left">
         <Link to="/home"> <h1>Welcome </h1></Link>
         {user&&<Link to="/explore"><i class="fas fa-compass"></i> Explore</Link>}
-        {user&&<Link to="/explore"><i class="fas fa-bell"></i> Notifications</Link>}
+        {user&&<Notifications/> }
+        
       </div>
 
       {/* <div class="navbar-search">
@@ -26,6 +30,7 @@ export default function Navbar(props) {
         <button><i class="fas fa-search"></i></button>
       </div> */}
 
+      {/* <Notifications/> */}
       {!user?<Link to="/login"><button onClick={() => handleLogout()}>Login</button></Link>:
       <div className="dropdown" onClick={() => { setOptions(!options) }} >
         <div className="user-dropdown" style={{height:"100%"}}>

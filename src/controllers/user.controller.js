@@ -41,8 +41,10 @@ const userController = {
         })
     },
     acceptFriendRequest:(req,res)=>{
-        User.acceptFriendRequest (req.user.id, req.params.id,  (error, result) => {
+        User.acceptFriendRequest (req.params.id, req.user.id,  (error, result) => {
             if (error) return res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
+            // console.log(result);
+            // console.log("From", req.user.id, "to", req.params.id );
             res.status(200).json({ "SUCCESS": "Friend requestAccepted" })
         })
     },
@@ -55,6 +57,17 @@ const userController = {
 
             }else{
                 res.status(200).json({ "SUCCESS": "Friend requestAccepted" })
+            }
+        })
+    },
+    declineFriendRequest:(req,res)=>{
+        User.declineFriendRequest(req.user.id,req.params.id,(err,result)=>{
+            if(err){
+                console.log(err);
+                res.status(500).json({ "ERR": "Friend request not  declined" })
+
+            }else{                
+                res.status(200).json({ "SUCCESS": "Friend request declined" })
             }
         })
     },
@@ -136,7 +149,7 @@ const userController = {
     },
     login: (req, res) => {
         console.log("Hellooo");
-        console.log(req.body);
+        // console.log(req.body);
         if (!req.body || !req.body.email || !req.body.pass)
             return res.status(401).json({ ERROR: "SOME FIELDS ARE REQUIRED" })
 
@@ -144,9 +157,9 @@ const userController = {
             if (err) return res.status(404).json({ ERROR: err.sqlMessage })
             if (result[0]) {
                 let user = result[0];
-                console.log(user);
+                // console.log(user);
                 bcrypt.compare(req.body.pass, user.pass).then((val) => {
-                    console.log(val);
+                    // console.log(val);
                     if (val) {
                         user.pass = undefined;
                         user = JSON.stringify(user)

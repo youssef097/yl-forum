@@ -23,7 +23,7 @@ module.exports = class User {
 
     static getUserById(id, my_id, callback) {
         con.query(`SELECT user.*, ${userFields} 
-        ${!my_id ? "" : `,(SELECT count(*)>0 FROM friendship where user_id = '${my_id}' and  friend_id = '${id}' and accepted = 'true') as isFriend, 
+        ${!my_id ? "" : `,(SELECT count(*)>0 FROM friendship where user_id = '${id}' and  friend_id = '${my_id}' and accepted = 1) as isFriend, 
         (SELECT count(*)>0 FROM follows where user_id = '${my_id}' and  followed_id = '${id}') as isFollowed`} 
         from user            
         where user.id = '${id}'   `, callback)
@@ -56,15 +56,14 @@ module.exports = class User {
 
 
     static unfollow(id, f_id, callback) {
-        console.log(id, f_id);
         con.query(`DELETE  FROM follows WHERE user_id = '${id}' and followed_id = '${f_id}';`, callback)
     }
 
     static getAllUsers(my_id, callback) {
-        console.log("My id!",my_id);
-        let sql = `SELECT user.*, ${userFields} ${!my_id ? "" : `,(SELECT count(*)>0 FROM friendship where user_id = '${my_id}' and  friend_id = user.id and accepted = 'true') as isFriend, 
+
+        let sql = `SELECT user.*, ${userFields} ${!my_id ? "" : `,(SELECT count(*)>0 FROM friendship where friend_id = '${my_id}' and  user_id = user.id and accepted = '1') as isFriend, 
         (SELECT count(*)>0 FROM follows where user_id = '${my_id}' and  followed_id = user.id) as isFollowed`} from user`
-        console.log(sql);
+
         con.query(sql, callback)
     }
 
@@ -78,6 +77,7 @@ module.exports = class User {
         INNER JOIN user ON friendship.user_id = user.id                   
         WHERE friendship.user_id = '${u_id}'`, callback)
     }
+
     static getReceivedFriendRequests(u_id, callback) {
         con.query(`SELECT friendship.accepted as accepted, user.name,user.id,user.profile,user.bio 
         FROM friendship
@@ -94,14 +94,19 @@ module.exports = class User {
     }
 
     static acceptFriendRequest(id, friend_id, callback) {
-        con.query(`UPDATE  friendship SET accepted = true  WHERE user_id = '${id}' and friend_id = '${friend_id}' `, callback)
+        con.query(`INSERT INTO  friendship(user_id, friend_id) values('${friend_id}', '${id}'); 
+        UPDATE  friendship SET accepted = 1  WHERE user_id = '${id}' and friend_id = '${friend_id}';
+        UPDATE  friendship SET accepted = 1  WHERE user_id = '${friend_id}' and friend_id = '${id}' `, callback)
+    }
+    static declineFriendRequest(id, friend_id, callback) {
+        con.query(`UPDATE  friendship SET accepted = 2  WHERE user_id = '${id}' and friend_id = '${friend_id}';
+        UPDATE  friendship SET accepted = 2  WHERE user_id = '${friend_id}' and friend_id = '${id}'; `, callback)
     }
 
     static getFriends(u_id, callback) {
         con.query(`SELECT  user.name, user.id, user.profile, user.bio 
-        FROM friendship
-        INNER JOIN user ON friendship.user_id = user.id                   
-        WHERE friendship.user_id = '${u_id}'`, callback)
+        FROM friendship inner join user   on user.id = friendship.friend_id     
+        WHERE friendship.user_id = '${u_id}' and accepted = '1' `, callback)
     }
 
     static updateField(field, newValue, id, callback) {

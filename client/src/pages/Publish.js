@@ -15,12 +15,6 @@ export default function Publish(props) {
     const [myTopics, setMyTopics] = useState(null)
     const [published, setPublished] = useState(false)
 
-
-    // const urlQSTopic =  
-    
-    // ?topic=9fbce1a0-7e88-11eb-9ecd-efd59d3ea415
-    
-
     useEffect(() => {
         axios.get("/api/topic/subscribed-topics")
             .then(({ data }) => {

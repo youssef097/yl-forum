@@ -7,45 +7,44 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 const path = require("path")
 const morgan = require("morgan")
-const socketIo = require("socket.io")
+const io = require("socket.io")(httpServer,()=>{
+    "Socket running on port 3001"
+})
 
-const io = socketIo(httpServer)
+
 
 app.use(cors())
-app.use(morgan("dev"))
+// app.use(morgan("dev"))
 
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json()); // <--- Here
-app.use("/api",express.static(path.join(__dirname,"/static")))
+app.use("/api", express.static(path.join(__dirname, "/static")))
 
 const userRoutes = require("./routes/user.routes")
 const topicRoutes = require("./routes/topic.routes")
 const postRoutes = require("./routes/post.routes");
 const commentRoutes = require("./routes/comment.routes")
 
-app.use("/api",userRoutes)
-app.use("/api",topicRoutes)
-app.use("/api",postRoutes)
-app.use("/api",commentRoutes)
+app.use("/api", userRoutes)
+app.use("/api", topicRoutes)
+app.use("/api", postRoutes)
+app.use("/api", commentRoutes)
 
 
-app.set("port", process.env.PORT||3001)
+app.set("port", process.env.PORT || 3001)
 
-io.on("connection",(socket)=>{
-    console.log("New user connected");
-    socket.emit("friendConnected")
-})
 
-httpServer.listen(app.get("port"),()=>{
+httpServer.listen(app.get("port"), () => {
     // console.log("Server running on port", app.get("port"));
-    db.connect((err)=>{
-        if(err){
+    db.connect((err) => {
+        if (err) {
             console.log(err);
-        }else{
-            console.log("Connected to DB");            
+        } else {
+            const chatService = require("./ChatService")
+            console.log("Connected to DB");
         }
     })
 });
 
 
-// module.exports =  socketIo;
+module.exports = { app, io: io };

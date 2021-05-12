@@ -19,10 +19,11 @@ export default function LoginPage(props) {
         axios.post("http://localhost:3001/api/user/login", { email, pass })
             .then(({ data }) => {
                 if (data.token) {
+                    console.log(data);
                     setToken(data.token)
                     console.log();
                     setResult("Logged correctly")
-                    setRedirect(true)
+                    // setRedirect(true)
                 }
             }).catch((err) => {
                 setRedirect(false)

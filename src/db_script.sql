@@ -87,3 +87,34 @@ CREATE TABLE IF NOT EXISTS friendship(
 );
 
 
+
+CREATE TABLE room(
+    id varchar(200) NOT null,
+    date date DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+CREATE TABLE message(
+    id varchar(200) NOT null,
+	sender varchar(200) NOT null,
+    receiver varchar(200),
+    room_id varchar(200),
+    text_content varchar(1000) NOT null,    
+    status int(1) DEFAULT 0,    
+    date date DEFAULT CURRENT_TIMESTAMP,
+    -- FOREIGN KEY (room_id) REFERENCES room(id),
+    FOREIGN KEY (sender) REFERENCES user(id),
+    FOREIGN KEY (receiver) REFERENCES user(id),
+    PRIMARY KEY (id)    
+);
+
+
+
+CREATE TABLE room_member(     
+     member_id varchar(200) NOT null,
+     role int(1) DEFAULT 0 not Null,
+     room_id varchar(200) NOT null,
+     date date DEFAULT CURRENT_TIMESTAMP,
+     FOREIGN KEY (member_id) REFERENCES user(id),
+     FOREIGN KEY (room_id) REFERENCES user(id),
+     PRIMARY KEY (room_id, member_id)
+);

@@ -15,7 +15,23 @@ import ExplorePage from './pages/ExplorePage';
 import TopicPage from './pages/TopicPage';
 import ProfilePage from './pages/ProfilePage';
 import PostPage from './pages/PostPage';
+import socket from "./services/socketService"
 
+
+
+socket.on("newMessage",(msg)=>{
+  console.log(msg);
+  // setMessages([...messages,msg.text_content ])
+})
+// socket.on("connection", () => {
+//   console.log("hello");
+// })
+// socket.connect("", {
+//   auth: { token: "Tokenasdasd" }
+// })
+// socket.on("friendConnected", () => {
+//   console.log("connected");
+// })
 
 function App() {
   const [user, setUser] = useState(null)
@@ -45,7 +61,7 @@ function App() {
           <Route path="/login" component={LoginPage} exact />
           <Route path="/register" component={RegisterPage} exact />
           <Route path="/" component={RegisterPage} exact />
-          <ProtectedRoute component={Publish} user={user} path="/publish" />          
+          <ProtectedRoute component={Publish} user={user} path="/publish" />
           <ProtectedRoute component={CreateTopic} user={user} path="/create-topic" />
           <ProtectedRoute component={ExplorePage} user={user} path="/explore" />
           <Route path="/user/:id" component={ProfilePage} exact />

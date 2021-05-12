@@ -27,6 +27,7 @@ export default function ProfilePage(props) {
     function fetchUserInfo() {
         axios.get("/api/get-user/" + props.match.params.id)
             .then(({ data }) => {
+                console.log(data.user);
                 setUserData(data.user)
                 fetchUserPosts()
             }).catch((err) => {
@@ -94,6 +95,10 @@ export default function ProfilePage(props) {
                                     Follow
                              </button>}
                             </div> : ""}
+                            <div>
+                            {isAuth() && userData.isFriend ? "Friend": ""}
+                            </div>
+                           
                         </div>
 
 

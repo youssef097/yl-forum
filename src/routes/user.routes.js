@@ -15,8 +15,8 @@ router.get("/user/suggested-friends", auth, userController.getAllUsers)
 router.get("/user/whoami", auth, (req, res) => {
     User.getUserById(req.user.id, null,(err, result) => {
         // console.log(err);
-       console.log(err);
-       console.log(result);
+    //    console.log(err);
+    //    console.log(result);
         res.status(200).json({ user:result[0] })
     })
 })
@@ -29,7 +29,7 @@ router.post("/user/unfollow/:id", auth, userController.unfollow)
 router.post("/user/send-friend-request/:id", auth, userController.sendFriendRequest)
 router.post("/user/cancel-friend-request/:id", auth, userController.cancelFriendRequest)
 router.post("/user/accept-friend-request/:id", auth, userController.acceptFriendRequest)
-router.post("/user/decline-friend-request/:id", auth, userController.cancelFriendRequest)
+router.post("/user/decline-friend-request/:id", auth, userController.declineFriendRequest)
 
 router.get("/user/friends",auth, userController.getFriends)
 router.get("/user/received-friend-requests",auth, userController.getReceivedFriendRequests)

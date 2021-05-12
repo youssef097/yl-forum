@@ -88,6 +88,7 @@ body {
 nav {
     /* border-radius:0 1em .3em; */
     position: sticky;
+    z-index: 222;
     top: 0;
     /* background: rgba(54, 255, 155); */
     background: whitesmoke;
@@ -108,11 +109,51 @@ nav img{
     display: flex;
     align-items: center;
     gap: 2em;
+    position: relative;
 }
 nav a {
     text-decoration: none;    
 }
-
+nav .notifications{
+    position: relative;
+    display: flex;
+}
+.navbar-bell{
+    
+}
+.notification-badge{
+    background: red;
+    position: absolute;
+    font-size: .7em;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    /* display: flex; */
+    left: .5em;
+    top: .7em;
+    border-radius: 50%;
+    padding: .3em;
+    height: 16px;
+    width: 16px;
+}
+.notification-list{
+    background-color: white;
+    height: 400px;
+    border-radius: .3em;
+    padding: .3em;
+    /* position: -webkit-sticky; */
+    top: 2em;
+    width: 300px;
+    position: absolute;
+    z-index: 12232;
+}
+.friend-request{
+    height: 3em;
+    display: flex;
+}
+.friend-request img{
+    height: 100%;
+}
 .dropdown{
     height: 2.5em;
     width: 12em;
@@ -175,8 +216,10 @@ aside {
     display: flex;
     flex-direction: column;
     gap: 1em;
-    position: -webkit-sticky;
-    position: sticky;
+    /* position: -webkit-sticky;
+    position: sticky; */
+    z-index:1 ;
+
     top: 4em;
 }
 
@@ -380,9 +423,15 @@ aside .user-followers>div {
 .rdw-editor-main{
     padding: 0 1em;
 }
+.friend-list{
+    display: flex;
+    flex-direction: column;
+    gap:1em;
+}
 
 .chat{
-    width: 25%;
+    min-width: 40em;
+    max-width: 25%;
     position: fixed;
     right: 8%;
     padding: 1em;
@@ -395,12 +444,53 @@ aside .user-followers>div {
     /* background: white; */
     display: flex;
 }
-.chat-friends{
-    background:gray;
-    width: 30%;
+.user{
+    display: flex;
+    gap: 1em;
 }
 .messages{
-    background: red;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+}
+.messages-header{
+    height: 10%;
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+    background: lightcoral;
+}
+
+.messages-body{
+    height: 75%;
+    background: lightgreen;
+}
+.messages-footer{
+    height: 15%;
+    padding: .4em;
+    justify-content: space-between;
+    display: flex;    
+    background: lightblue;
+}
+.messages-footer input{
+    width: 80%;
+}
+.messages button{
+    width: 20%;
+}
+.chat-active{
+    background: pink;
+}
+.chat-friends{
+    padding: .3em;
+    /* display: flex; */
+
+    background:white;
+    /* width: 60%; */
+}
+.messages{
+    background: lightblue;
     width: 70%;
 }
 /* .chat-body  */

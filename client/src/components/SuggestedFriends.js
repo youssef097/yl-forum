@@ -67,7 +67,7 @@ export default function SuggestedFriends({ id, updateUser }) {
                 {!friends ? <Loading /> : friends.map((e) => {
                     if (e.id !== id) {
                         // updateUser(e)
-                        return (<div key={e.id}>
+                        return (<div key={e.id} onClick={()=>{console.log(e);}} >
                             <img height="100%" src={e?.profile ? e.profile : "/api/img/default-profile-picture1.jpg"} alt="" />
                             <div>
                                 <Link to={`/user/${e.id}`} className="bold" >{e.name}</Link> <span >{e.followers}</span> followers
@@ -78,19 +78,16 @@ export default function SuggestedFriends({ id, updateUser }) {
                                     </button>
                                 }
 
-                                {!e.isFriend?
+                                {!e.isFriend ?
                                     <button onClick={() => { sendFriendRequest(e.id) }} >
                                         <i className="fas fa-user-plus"></i>
-                                    </button>:<button  className="danger" onClick={() => { cancelFriendsRequest(e.id) }} >
-                                            <i className="fas fa-users-slash"></i>
+                                    </button> : <button className="danger" onClick={() => { cancelFriendsRequest(e.id) }} >
+                                        <i className="fas fa-users-slash"></i>
                                     </button>
                                 }
-
-
+                                
                             </div>
                         </div>)
-                    } else {
-
                     }
                 })
                 }
