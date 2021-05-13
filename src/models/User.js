@@ -54,6 +54,22 @@ module.exports = class User {
     }
 
 
+    static updateProfile(avatar, bio,banner,uid,cb){
+        let sql = "";
+
+        if(avatar){
+            sql += `UPDATE user SET profile = '${avatar}' where id = '${uid}';`
+        }
+        if(bio){
+            sql += `UPDATE user SET bio = '${bio}' where id = '${uid}';`
+        }
+        if(banner){
+            sql += `UPDATE user SET banner = '${banner}' where id = '${uid}';`
+        }
+        console.log(sql);
+        con.query(sql,cb)
+    }
+
 
     static unfollow(id, f_id, callback) {
         con.query(`DELETE  FROM follows WHERE user_id = '${id}' and followed_id = '${f_id}';`, callback)
@@ -61,7 +77,7 @@ module.exports = class User {
 
     static getAllUsers(my_id, callback) {
 
-        let sql = `SELECT user.*, ${userFields} ${!my_id ? "" : `,(SELECT count(*)>0 FROM friendship where friend_id = '${my_id}' and  user_id = user.id and accepted = '1') as isFriend, 
+        let sql = `SELECT user.*, ${userFields} ${!my_id ? "" : `,(SELECT count(*)>0 FROM friendship where friend_id = '${my_id}' and  user_id = user.id or user.id = '${my_id}' and  friend_id = user.id) as isFriend, 
         (SELECT count(*)>0 FROM follows where user_id = '${my_id}' and  followed_id = user.id) as isFollowed`} from user`
 
         con.query(sql, callback)

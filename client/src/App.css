@@ -4,10 +4,11 @@
     box-sizing: border-box;
 }
 
-a{
+a {
     text-decoration: none;
     color: inherit;
 }
+
 iframe {
     width: 100%;
     max-width: 640px;
@@ -21,16 +22,16 @@ iframe {
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: #333;
-    background-image: url("http://localhost:3001/api/img/a.jpg");
-    background-repeat: no-repeat;
+    /* background-image: url("/bg.jpg"); */
+    /* background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: fixed; */
     /* filter: blur(4px); */
 }
 
-.glass{
-    background-color: rgba(255, 255, 255, .50);
-    border: 1px solid white;
+.glass {
+    background-color: rgba(255, 255, 255);
+    /* border: 1px solid white; */
     border-radius: .3em;
 
 }
@@ -51,16 +52,19 @@ body {
     /* z-index: 123; */
 }
 
-.form-container{
+.form-container {
     display: flex;
     /* background: red; */
     height: 80vh;
 }
+
 .select-topic-publish {
     display: flex;
-    flex-direction: row-reverse;
+    gap: 1em;
+    /* flex-direction: row-reverse; */
 }
-.form-container > *{
+
+.form-container>* {
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -69,22 +73,27 @@ body {
     border-radius: .3em;
     background: rgba(255, 255, 255, .80);
 }
+
 .your-topics-buttons {
     padding: .5em;
-    align-items: center;    
+    align-items: center;
     display: flex;
     flex-direction: column;
 }
-.your-topics a{
+
+.your-topics a {
     width: 100%;
 }
-.your-topics-buttons button{
+
+.your-topics-buttons button {
     padding: .3em;
-    background: rgb(134, 154, 211);
+    background: #9A00FB;
+    color: whitesmoke;
     border: none;
     border-radius: .3em;
     width: 100%;
 }
+
 nav {
     /* border-radius:0 1em .3em; */
     position: sticky;
@@ -101,27 +110,31 @@ nav {
     /* position: relative; */
 
 }
-nav img{
+
+nav img {
     border-radius: 50%;
-    border:2px solid rgba(54, 255, 155);
+    border: 2px solid rgba(54, 255, 155);
 }
-.navbar-left{
+
+.navbar-left {
     display: flex;
     align-items: center;
     gap: 2em;
     position: relative;
 }
+
 nav a {
-    text-decoration: none;    
+    text-decoration: none;
 }
-nav .notifications{
+
+nav .notifications {
     position: relative;
     display: flex;
 }
-.navbar-bell{
-    
-}
-.notification-badge{
+
+.navbar-bell {}
+
+.notification-badge {
     background: red;
     position: absolute;
     font-size: .7em;
@@ -136,7 +149,8 @@ nav .notifications{
     height: 16px;
     width: 16px;
 }
-.notification-list{
+
+.notification-list {
     background-color: white;
     height: 400px;
     border-radius: .3em;
@@ -147,14 +161,17 @@ nav .notifications{
     position: absolute;
     z-index: 12232;
 }
-.friend-request{
+
+.friend-request {
     height: 3em;
     display: flex;
 }
-.friend-request img{
+
+.friend-request img {
     height: 100%;
 }
-.dropdown{
+
+.dropdown {
     height: 2.5em;
     width: 12em;
     display: flex;
@@ -167,29 +184,30 @@ nav .notifications{
     position: relative;
     /* background: red; */
 }
-.user-dropdown{
+
+.user-dropdown {
     /* background: pink; */
     display: flex;
     gap: .4em;
 }
 
-.dropdown-menu{
+.dropdown-menu {
     position: absolute;
 
     z-index: 999;
     background: whitesmoke;
     padding: 1em;
-    height:200px;
-    width: 100%;    
+    height: 200px;
+    width: 100%;
     top: 100%;
     list-style: none;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     right: 0px;
-}   
+}
 
-.dropdown-menu button{    
+.dropdown-menu button {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -218,12 +236,16 @@ aside {
     gap: 1em;
     /* position: -webkit-sticky;
     position: sticky; */
-    z-index:1 ;
+    z-index: 1;
 
     top: 4em;
 }
 
-
+.shadow {
+    box-shadow: 0px 4px 6px -1px rgba(38, 38, 38, 0.1);
+    -webkit-box-shadow: 0px 4px 6px -1px rgba(38, 38, 38, 0.1);
+    -moz-box-shadow: 0px 4px 6px -1px rgba(38, 38, 38, 0.1);
+}
 
 .loading {
     margin: auto;
@@ -249,22 +271,28 @@ aside {
 
 /* SIDEBAR - MY PROFLE  */
 .my-profile {
-    /* border: 2px solid salmon;   */
-    border-radius: .3em;
-    border: solid white 1px;
-    background: rgba(255, 255, 255, .50);
+    /* overflow: hidden;     */
+    border-radius: .5em;   
+    height: 30em; 
+    /* background: rgba(255, 255, 255, .50); */
+    background: white;
 
 }
-
+.my-profile .content{
+    border-radius: .5em;    
+}
+.my-profile .banner{
+    max-height: 10em;
+}
 aside .user-name {
-    color: blue;
+    color: black;
     font-weight: bold;
     margin-left: 5em;
 }
 
 aside .profile-image {
     border-radius: 50%;
-    border: 2px solid #333;
+    border: 2px solid #9A00FB;
     position: absolute;
     width: 50px;
     transform: translate(20px, -30px);
@@ -285,7 +313,7 @@ aside .user-followers>div {
     width: 100%;
 }
 
-.my-profile .user-data {
+.my-profile .user-data {    
     padding: .5em;
     height: 100%;
     width: 100%;
@@ -305,21 +333,49 @@ aside .user-followers>div {
 }
 
 .suggested-friends {
-
-    /* border: 1px solid; */
-    /* background: blue; */
+    /* padding-top: 2em; */
+    min-height: 25em;
+    overflow-y: scroll;
+    /* background: #0028ee13; */
+    background: white;
     display: flex;
-    background: rgba(255, 255, 255, .50);
+    /* background: rgba(255, 255, 255, .50); */
+    border-radius: 1em;
     border: 1px solid white;
-    border-radius: .2em;
 
     flex-direction: column;
+    position: relative;
     /* gap: .3em; */
 
 }
 
+.suggested-friends::-webkit-scrollbar-track
+{
+    /* height: 3; */
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+.suggested-friends::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+.suggested-friends::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #c4c4c4;
+}
 .suggested-friends .card-header {
+    /* background: #0028ee13; */
+    background: white;
+    /* background: white; */
+    /* position: absolute; */
+    position: absolute;    
+    /* top: 0px; */
+    width: 100%;
     /* background: gray; */
+    /* position: fixed; */
     padding: .3em;
 }
 
@@ -329,76 +385,98 @@ aside .user-followers>div {
     flex-direction: column;
     gap: .3em;
 }
+.suggested-friends .card-body> :first-child{
+    margin-top: 1em;
+}
 
 .suggested-friends button {
     cursor: pointer;
     border: none;
-    color: #333;
+    font-weight: 600;
     padding: .3em;
+    color: white;
     border-radius: .3em;
-    background: rgb(134, 154, 211);
+    background: #9A00FB;
 }
 
 .suggested-friends .danger {
-    background: rgb(236, 138, 138);
+    background: white;
+    color: #9A00FB;
+    border: 1px solid #9A00FB;
 }
 
-.suggested-friends .card-body>div {
+.suggested-friend  {
     width: 100%;
-    background: rgba(255, 255, 255, .50);
     border-radius: .3em;
-
-    height: 3em;
+    /* background: #000; */
+    /* height: 3em; */
     /* border: 1px solid gray; */
     padding: .3em;
     display: flex;
     gap: .7em;
 }
+.suggested-friend-button{
+    display: flex;
+    width: 100%;
+    /* background: red; */
+    /* justify-content: space-between; */
+    gap: 1em;
+    align-items: center;
+}
+.suggested-friend-button button{
+    /* height: 20px; */
+    /* margin: 0;
+    padding: 0; */
+    /* height: 20px; */
+}
 
-.suggested-friends img{
+.suggested-friends img {
     border-radius: 50%;
-    border: 2px solid rgba(54, 255, 155);
+    width: 40px;
+    height: 40px;
+    border: 2px solid #9A00FB;
 }
 
 .bold {
     font-weight: 700;
-    color: steelblue;
+    color: black;
     cursor: pointer;
 
 }
 
 
 
-.your-topics{
+.your-topics {
     display: block;
     /* z-index: -1; */
     position: initial;
 }
 
-.your-topics > div {
+.your-topics>div {
     border: 1px solid white;
     border-radius: .3em;
     padding: .4em;
-    width: 100%;    
-    background-color: rgba(255, 255, 255, .50);
-}
-.your-topics-header{    
+    width: 100%;
+    background: white;
+    /* background-color: rgba(255, 255, 255, .50); */
 }
 
-.your-topics-body{
+.your-topics-header {}
+
+.your-topics-body {
     padding: .2em;
     display: flex;
     flex-direction: column;
     gap: .3em;
 }
 
-.your-topics .topic{
+.your-topics .topic {
     height: 3.5em;
 }
 
-.your-topics .topic-name{
+.your-topics .topic-name {
     color: blue;
-    font-weight: 600;    
+    font-weight: 600;
 }
 
 .home {
@@ -408,53 +486,64 @@ aside .user-followers>div {
     justify-content: stretch;
     justify-content: center;
 }
-.topic{
+
+.topic {
     display: flex;
     flex-direction: row;
     gap: 1em;
     align-items: center;
     /* height: 4em; */
 }
-.topic img{
+
+.topic img {
     display: block;
     height: 3em;
     width: 3em;
 }
-.rdw-editor-main{
+
+.rdw-editor-main {
     padding: 0 1em;
 }
-.friend-list{
+
+.friend-list {
     display: flex;
     flex-direction: column;
-    gap:1em;
+    gap: 1em;
 }
 
-.chat{
+.chat {
+    background: whitesmoke;
     min-width: 40em;
+    border: 2px solid #9A00FB;
     max-width: 25%;
     position: fixed;
     right: 8%;
     padding: 1em;
     /* width: 2em; */
+    z-index: 9999;
     bottom: 1em;
     cursor: pointer;
 }
-.chat-body{
+
+.chat-body {
     height: 20em;
     /* background: white; */
     display: flex;
 }
-.user{
+
+.user {
     display: flex;
     gap: 1em;
 }
-.messages{
+
+.messages {
     display: flex;
     flex-direction: column;
     align-content: center;
 
 }
-.messages-header{
+
+.messages-header {
     height: 10%;
     display: flex;
     align-items: center;
@@ -462,47 +551,237 @@ aside .user-followers>div {
     background: lightcoral;
 }
 
-.messages-body{
+.messages-body {
     height: 75%;
     background: lightgreen;
 }
-.messages-footer{
+
+.messages-footer {
     height: 15%;
     padding: .4em;
     justify-content: space-between;
-    display: flex;    
+    display: flex;
     background: lightblue;
 }
-.messages-footer input{
+
+.messages-footer input {
     width: 80%;
 }
-.messages button{
+
+.messages button {
     width: 20%;
 }
-.chat-active{
-    background: pink;
+.chat-header{
+    padding-bottom: .5em;
+    color: #9A00FB;
+    /* background: lightgray; */
 }
-.chat-friends{
-    padding: .3em;
-    /* display: flex; */
+.chat-active {
+    background: white;
+}
 
-    background:white;
-    /* width: 60%; */
+.chat-friends {
+    background: #edd7fa;
+    padding: .3em;
+    width: 25%;
+    
 }
-.messages{
+
+.messages {
     background: lightblue;
     width: 70%;
 }
+
 /* .chat-body  */
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     aside {
         display: none !important;
     }
-    nav .dropdown{
+    
+    nav .dropdown {
         display: none;
+        width: 100%;
+        overflow: hidden;
+    }
+    .chat{
+        min-width: 80%;        
+        width: 100% !important;
+        margin: auto;
+        /* position: absolute; */
     }
     .post-list-container {
         width: 100% !important;
     }
 }
+.explore-topic-list{
+    margin-top: 1em;
+    /* background: blue; */
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.topic-banner{
+    width: 100%;
+    background-repeat:no-repeat ;
+    background-size: cover;
+    background-position-y:50%;
+    height: 12em;
+    background-color: steelblue;
+}
+.reduced{
+    height: 0px;
+}
+.explore-topic-list{
+    border-radius: .3em;
+    background: white;
+    padding: 1em;
+}
+.explore-topic-list h2{
+    color: #9A00FB;
+}
+.topic-explore{
+    display:flex;
+    flex-direction: column;
+    /* background: #0028ee1a; */
+    background: white;
+    padding: .3em;
+    border-radius: .3em;
+    cursor: pointer;
+    /* background: red; */
+    border: 2px solid whitesmoke;
+    /* margin: 1em; */
+    /* background: ; */
+}
+.explore-page{
+    background: white;
+    margin-top: 2em;
+}
+.topic-explore:hover{
+    border: 2px solid #9A00FB;
+}
+/* .profile-badge{
+    border:1px solid #c1c1c1;
+    padding:5px;
+    position: relative;
+} */
+
+/* .user-detail{
+    background-color: #fff;
+    position: relative;
+    padding:115px 0px 10px 0px;
+    color:#8B8B89;
+} */
+/* .user-detail h3{
+    margin: 0px;
+    margin:0px 0px 5px 0px;
+    color: #000;
+} */
+/* .user-detail p{ */
+
+    /* font-size:14px;
+}
+.user-detail .btn{
+    margin-bottom:10px;
+    background-color: #fff;
+    border:1px solid #DEDEDE;
+    border-radius: 0px;
+    color:black;
+} */
+/* .user-detail .btn i{
+    color:#D35B4D;
+    padding-right:18px;
+} */
+/* .profile-pic{
+    position: absolute;
+    height:120px;
+    width:120px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0px;
+    z-index: 1001;
+    padding: 10px;
+} */
+/* .profile-pic img{
+   
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px 0px #c1c1c1;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+}    */
+.hidden{
+    display: none;
+}
+
+.form-container>div{
+    font-family: sans-serif;
+    width: 500px !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+    margin-bottom:3em;
+    border-radius: 10px;
+    background-color: #ffff;
+    padding: 1.8rem;
+    box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.1);
+}
+.form-container button{
+    background-color: rgb(69, 69, 185);
+    color: white;
+    padding: 18px 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+}
+input[type="text"],
+input[type="password"],
+input[type="file"]
+ {
+  padding: 15px 20px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+.form-container div{
+    width: 100%;
+    /* background: gray; */
+    /* height: 30em; */
+}
+.form-block{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    color: rgb(170 166 166);
+}
+
+.publish-container{
+    background: white;
+    margin-top: 2em;
+    padding: 1em;
+}
+.publish-container select{
+    color: #9A00FB;
+    border: 2px solid #9A00FB;
+    border-radius: .5em;
+}
+.publish-container button{
+    border: 1px solid #9A00FB;
+    color: white;
+    padding: 1em;
+    background: #9A00FB;
+    border-radius: .4em;
+    /* border: ; */
+    margin-top: 1em;
+}
+/* .form-block input{
+    height: 2em;
+    padding: .5em;
+    border-radius: 1em;
+    border: 1px solid ;
+    width: 100%;
+} */

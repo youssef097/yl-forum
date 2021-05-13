@@ -27,7 +27,7 @@ module.exports = class Topic {
     }
 
     static getAllTopics(callback) {
-        con.query(`SELECT title,id,image,subscribers from topic`, callback)
+        con.query(`SELECT title,id,image,subscribers,banner from topic`, callback)
     }
 
     static getPopularTopics(callback) {

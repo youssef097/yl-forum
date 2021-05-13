@@ -65,33 +65,27 @@ export default function SuggestedFriends({ id, updateUser }) {
             </div>
             <div className="card-body">
                 {!friends ? <Loading /> : friends.map((e) => {
-                    if (e.id !== id) {
+                    if (e.id !== id ) {
                         // updateUser(e)
-                        return (<div key={e.id} className="suggested-friend" onClick={() => { console.log(e); }} >
-                            <img src={e?.profile ? "/api/uploads/" + e.profile : "/api/img/default-profile-picture1.jpg"} alt="" />
+                        return (<div key={e.id} onClick={()=>{console.log(e);}} >
+                            <img height="100%" src={e?.profile ? e.profile : "/api/img/default-profile-picture1.jpg"} alt="" />
                             <div>
                                 <Link to={`/user/${e.id}`} className="bold" >{e.name}</Link> <span >{e.followers}</span> followers
-                                <div className="suggested-friend-button">
-
-                                    {e.isFollowed ? <button className="danger" onClick={() => handleUnfollow(e.id)}>
-                                        Unfollow
+                                {e.isFollowed ? <button className="danger" onClick={() => handleUnfollow(e.id)}>
+                                    Unfollow
                                     </button> : <button onClick={() => handleFollow(e.id)}>
-                                        Follow
+                                    Follow
                                     </button>
-                                    }
-                                    <div>
+                                }
 
-                                    {!e.isFriend ?
-                                        <button onClick={() => { sendFriendRequest(e.id) }} >
-                                            <i className="fas fa-user-plus"></i>
-
-                                        </button> : <button className="danger" onClick={() => { cancelFriendsRequest(e.id) }} >
-                                            <i className="fas fa-users-slash"></i>
-                                        </button>
-                                    }
-                                    </div>
-                                </div>
-
+                                {!e.isFriend ?
+                                    <button onClick={() => { sendFriendRequest(e.id) }} >
+                                        <i className="fas fa-user-plus"></i>
+                                    </button> : <button className="danger" onClick={() => { cancelFriendsRequest(e.id) }} >
+                                        <i className="fas fa-users-slash"></i>
+                                    </button>
+                                }
+                                
                             </div>
                         </div>)
                     }

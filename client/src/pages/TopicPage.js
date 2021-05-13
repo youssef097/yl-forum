@@ -46,7 +46,7 @@ export default function TopicPage(props) {
     }
 
     return (
-        <div className="topic-page glass">
+        <div className="topic-page">
             {data === null ? <Loading /> : data === "ERROR" ? "Error" : <div>
                 <div style={{ backgroundImage: `url('/api/uploads/${data.banner}')` }} className="banner">
 
@@ -70,7 +70,7 @@ export default function TopicPage(props) {
                     </div>
                 </div>
                 <div className="glass">
-                    <PostListContainer {...props} joined = {data.joined} topic={data.id} />
+                    <PostListContainer fullWidth = {true} {...props} joined = {data.joined} topic={data.id} />
                 </div>
                 {/* <img src={`/api/uploads/${data.banner}`} alt=""/> */}
             </div>}

@@ -64,9 +64,10 @@ function App() {
           <ProtectedRoute component={Publish} user={user} path="/publish" />
           <ProtectedRoute component={CreateTopic} user={user} path="/create-topic" />
           <ProtectedRoute component={ExplorePage} user={user} path="/explore" />
-          <Route path="/user/:id" component={ProfilePage} exact />
-          <Route path="/topic/:id" component={TopicPage} />
-          <Route path="/post/:id" component={PostPage} />
+          <ProtectedRoute component={ProfilePage} user={user} path="/my-profile" />
+          <Route path="/user/:id"  myData = {user} component={ProfilePage} exact />
+          <Route path="/topic/:id"  myData = {user} component={TopicPage} />
+          <Route path="/post/:id" component={(props)=> <PostPage {...props} myData ={user} />} />
           <Route path="/home" component={(props) => <HomePage {...props} user={user} updateUser={() => fetchUser()} exact />} />
         </main>
       </Fragment>

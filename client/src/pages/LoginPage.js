@@ -41,13 +41,18 @@ export default function LoginPage(props) {
     }
     return (redirect ? <Redirect to={{ pathname: "/home", state: { from: "/login" } }} /> :
         <div className="form-container">          
-            <form  onSubmit={(e) => handleSubmit(e)}>
-                <input className=" " onChange={(e) => setEmail(e.target.value)} value={email} type="text" />
-                <br />
-                <input className=" " onChange={(e) => setPass(e.target.value)} value={pass} type="password" />
-                <br />
+            <form  onSubmit={(e) => handleSubmit(e)}>                
+                <h2>Login</h2>
+                <div className="form-block">
+                    <label >Email</label>
+                    <input className=" " onChange={(e) => setEmail(e.target.value)} value={email} type="text" />
+                </div>
+                <div className="form-block">
+                    <label htmlFor="">Password</label>
+                    <input className=" " onChange={(e) => setPass(e.target.value)} value={pass} type="password" />
+                </div>
                 {/* <span>{email}  ---  {pss} </span>     <br /> */}
-                <input disabled={!email||!pass} type="submit" value="Login" />
+                <button disabled={!email||!pass} type="submit">Login</button>
                 <div>
                     {result==="loading"?<Loading/>:result}
                 </div>

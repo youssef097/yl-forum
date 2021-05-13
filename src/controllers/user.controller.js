@@ -7,15 +7,15 @@ dotenv.config();
 
 const userController = {
     getAllUsers: (req, res) => {
-        let myId = req.user? req.user.id : null; 
+        let myId = req.user ? req.user.id : null;
 
         User.getAllUsers(myId, (err, users) => {
             // Una vez tengo los 
-            if(err){
+            if (err) {
                 console.log(err);
 
-            }else{
-                        
+            } else {
+
                 // users.map((u, i) => {
                 //     User.isFollowed(req.user.id, u.id, (err, isFwd) => {
                 //         u.pass = undefined;
@@ -40,8 +40,8 @@ const userController = {
             }
         })
     },
-    acceptFriendRequest:(req,res)=>{
-        User.acceptFriendRequest (req.params.id, req.user.id,  (error, result) => {
+    acceptFriendRequest: (req, res) => {
+        User.acceptFriendRequest(req.params.id, req.user.id, (error, result) => {
             if (error) return res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
             // console.log(result);
             // console.log("From", req.user.id, "to", req.params.id );
@@ -49,24 +49,24 @@ const userController = {
         })
     },
 
-    cancelFriendRequest:(req,res)=>{
-        User.cancelFriendRequest(req.user.id,req.params.id,(err,result)=>{
-            if(!err){
+    cancelFriendRequest: (req, res) => {
+        User.cancelFriendRequest(req.user.id, req.params.id, (err, result) => {
+            if (!err) {
                 console.log(err);
                 res.status(500).json({ "ERR": "Friend requestAccepted" })
 
-            }else{
+            } else {
                 res.status(200).json({ "SUCCESS": "Friend requestAccepted" })
             }
         })
     },
-    declineFriendRequest:(req,res)=>{
-        User.declineFriendRequest(req.user.id,req.params.id,(err,result)=>{
-            if(err){
+    declineFriendRequest: (req, res) => {
+        User.declineFriendRequest(req.user.id, req.params.id, (err, result) => {
+            if (err) {
                 console.log(err);
                 res.status(500).json({ "ERR": "Friend request not  declined" })
 
-            }else{                
+            } else {
                 res.status(200).json({ "SUCCESS": "Friend request declined" })
             }
         })
@@ -90,8 +90,8 @@ const userController = {
     getUser: (req, res) => {
         console.log("llamado");
         let { id } = req.params;
-        let myId = req.user? req.user.id : null; 
-        User.getUserById(id,  myId, (err, result) => {
+        let myId = req.user ? req.user.id : null;
+        User.getUserById(id, myId, (err, result) => {
             let u = result[0]
             if (err || !result[0]) {
                 console.log(err);
@@ -210,7 +210,7 @@ const userController = {
             }
         })
     },
-    
+
     unfollow: (req, res) => {
         User.unfollow(req.user.id, req.params.id, (err, resul) => {
             if (err) {
@@ -222,49 +222,56 @@ const userController = {
     },
 
     updateProfile: (req, res) => {
-        let newProfile = "myNewProfile.png"
-        User.updateField("profile", newProfile, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
+        let newBio = req.body.bio;
+        let newBanner = req.banner;
+        let newAvatar = req.avatar;
+        console.log(newBio, newAvatar, newBanner);
+
+        let error = false;
+        console.log(req.body);
+        User.updateProfile(newAvatar,newBio, newBanner, req.user.id, (error, result) => {
             if (error) {
+                error = true;
                 res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
             } else {
                 res.status(200).json({ SUCCESS: "Updated profile image succesfully" })
+            }
+        })
+    },
+    // updateBanner: (req, res) => {
+    //     console.log(req.body);
+    //     let newBanner = req.body.banner
+    //     User.updateField("banner", newBanner, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
+    //         if (error) {
+    //             res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
+    //         } else {
+    //             res.status(200).json({ SUCCESS: "Updated Pro image succesfully" })
 
-            }
-        })
-    },
-    updateBanner: (req, res) => {
-        let newBanner = "myNewBanner.png"
-        User.updateField("banner", newBanner, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
-            if (error) {
-                res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
-            } else {
-                res.status(200).json({ SUCCESS: "Updated Pro image succesfully" })
-
-            }
-        })
-    },
-    updateBio: (req, res) => {
-        let newBio = "Im from callosica del segura"
-        User.updateField("bio", newBio, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
-            if (error) {
-                res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
-            } else {
-                res.status(200).json({ SUCCESS: "Updated Bio succesfully" })
-            }
-        })
-    },
-    updateUbication: (req, res) => {
-        let newUbication = "Australia"
-        User.updateField("ubication", newUbication, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
-            if (error) {
-                res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
-            } else {
-                res.status(200).json({ SUCCESS: "Updated ubication succesfully" })
-            }
-        })
-    },
-    getReceivedFriendRequests:(req,res)=>{
-        User.getReceivedFriendRequests(req.user.id,(err,requests)=>{
+    //         }
+    //     })
+    // },
+    // updateBio: (req, res) => {
+    //     let newBio = "Im from callosica del segura"
+    //     User.updateField("bio", newBio, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
+    //         if (error) {
+    //             res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
+    //         } else {
+    //             res.status(200).json({ SUCCESS: "Updated Bio succesfully" })
+    //         }
+    //     })
+    // },
+    // updateUbication: (req, res) => {
+    //     let newUbication = "Australia"
+    //     User.updateField("ubication", newUbication, "153d46c0-7792-11eb-b0dc-35181c452216", (error, result) => {
+    //         if (error) {
+    //             res.status(500).json({ ERROR: error.code, message: error.sqlMessage })
+    //         } else {
+    //             res.status(200).json({ SUCCESS: "Updated ubication succesfully" })
+    //         }
+    //     })
+    // },
+    getReceivedFriendRequests: (req, res) => {
+        User.getReceivedFriendRequests(req.user.id, (err, requests) => {
             if (err) {
                 res.status(500).json({ ERROR: err.code, message: err.sqlMessage })
             } else {
@@ -274,8 +281,8 @@ const userController = {
         })
     },
 
-    getSentFriendRequests:(req,res)=>{
-        User.getSentFriendRequests(req.user.id,(err,requests)=>{
+    getSentFriendRequests: (req, res) => {
+        User.getSentFriendRequests(req.user.id, (err, requests) => {
             if (err) {
                 res.status(500).json({ ERROR: err.code, message: err.sqlMessage })
             } else {

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Comment from './Comment'
 import Loading from './Loading'
 
+import "./Comments.css"
 
 export default function CommentSection({isAnswer,parentComment,postId}) {
     const [comments, setComments] = useState([])

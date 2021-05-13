@@ -17,8 +17,8 @@ export default function Navbar(props) {
   
 
   return (
-    <nav>
-      <div className="navbar-left">
+    <nav className="shadow">
+      <div className="navbar-left ">
         <Link to="/home"> <h1>Welcome </h1></Link>
         {user&&<Link to="/explore"><i class="fas fa-compass"></i> Explore</Link>}
         {user&&<Notifications/> }
@@ -34,14 +34,14 @@ export default function Navbar(props) {
       {!user?<Link to="/login"><button onClick={() => handleLogout()}>Login</button></Link>:
       <div className="dropdown" onClick={() => { setOptions(!options) }} >
         <div className="user-dropdown" style={{height:"100%"}}>
-          <img className="avatar" height="100%" src={user?.profile ? user.profile : "/api/img/default-profile-picture1.jpg"} className="profile-image" alt="" />
+          <img className="avatar" height="100%" src={user?.profile ? "/api/uploads/"+user.profile : "/api/img/default-profile-picture1.jpg"} className="profile-image" alt="" />
           {user.name}
         </div>
 
         <i class="fas fa-caret-square-down"></i>
         {options && user && <ul className="dropdown-menu" >
           <li>
-            <Link to="/my-profile"><button onClick={() => handleLogout()}> <i class="fas fa-user"></i> <span>My Profile</span> </button></Link> 
+            <Link to="/my-profile"><button> <i class="fas fa-user"></i> <span>My Profile</span> </button></Link> 
           </li>
           <li>
             <Link to="/home"><button onClick={() => handleLogout()}> <i class="fas fa-cog"></i> <span>Settings</span> </button></Link> 

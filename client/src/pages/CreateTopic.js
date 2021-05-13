@@ -45,23 +45,36 @@ export default function CreateTopic() {
         <div className="form-container">
 
             <div>
-                <div>
-                    Name: <input type="text" value={name} onChange={(e) => { setName(e.target.value) }} />
+                <h2>Create Topic</h2>
+                <div className="form-block" >
+                    <label>
+                        Name:
+                        </label>
+                    <input type="text" value={name} onChange={(e) => { setName(e.target.value) }} />
                 </div>
-                <div>
-                    Desc: <input type="text" value={desc} onChange={(e) => { setDesc(e.target.value) }} />
+                <div className="form-block">
+                    <label>
+                        Desc:
+                        </label>
+                    <input type="text" value={desc} onChange={(e) => { setDesc(e.target.value) }} />
                 </div>
-                <div>
-                    Image: <input type="file" name="image" onChange={(e) => { handleFileSelect(e) }} />
+                <div className="form-block">
+                    <label>
+                        Image:
+                        </label>
+                    <input type="file" name="image" onChange={(e) => { handleFileSelect(e) }} />
                 </div>
-                <div>
-                    Banner: <input type="file" name="banner" onChange={(e) => { handleFileSelect(e) }} />
+                <div className="form-block">
+                    <label>
+                        Banner:
+                        </label>
+                    <input type="file" name="banner" onChange={(e) => { handleFileSelect(e) }} />
                 </div>
-                <div>
-                </div>
-                <button onClick={handleSubmit}>
-                    upload
+                <div className="form-block">
+                    <button onClick={handleSubmit}>
+                        upload
                </button>
+                </div>
             </div>
         </div>
     )

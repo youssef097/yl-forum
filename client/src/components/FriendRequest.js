@@ -31,7 +31,7 @@ export default function FriendRequest({data}) {
         <div className="friend-request">
             {/* <h5>Friend request</h5> */}
             
-            <img src={data?.profile ? data.profile : "/api/img/default-profile-picture1.jpg"} className="profile-image" alt="" />
+            <img  style={{width:"40px", height:"40px"}} src={data?.profile ? "/api/uploads/"+data.profile : "/api/img/default-profile-picture1.jpg"} className="profile-image" alt="" />
             <div className="request-details">
                 <div>
                     <Link to={"/user/"+data.id} ><b>{data.name}</b></Link> wants to be your friend

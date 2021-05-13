@@ -4,8 +4,22 @@ const userController = require("../controllers/user.controller.js")
 const auth = require("../auth");
 const User = require("../models/User.js");
 const optionalAuth = require("../optionalAuth.js");
+const multer = require("multer");
+const uuid = require("uuid")
+const path = require("path")
+const storage = multer.diskStorage({
+    destination: path.join(__dirname, '../static/uploads'),    
+    filename:  (req, file, cb) => {
+        let finalName =uuid.v4()+path.extname(file.originalname)
+        req[file.fieldname] = finalName;
+        cb(null, finalName);
+    },
 
-
+})
+const uploadImage = multer({    
+    storage,    
+    limits:{fileSize: 1000000}
+});
 
 router.get("/users", userController.getAllUsers)
 router.get("/get-user/:id", optionalAuth, userController.getUser)
@@ -41,10 +55,11 @@ router.post("/user/register", userController.register)
 router.post("/user/login", userController.login)
 
 
-router.put("/update-banner", auth, userController.updateBanner)
-router.put("/update-bio", auth, userController.updateBio)
-router.put("/update-profile", auth, userController.updateProfile)
-router.put("/update-banner", auth, userController.updateBanner)
-router.put("/update-ubication", auth, userController.updateUbication)
+// router.put("/update-banner", auth, userController.updateBanner)
+// router.put("/update-bio", auth, userController.updateBio)
+// router.put("/update-banner", auth, userController.updateBanner)
+// router.put("/update-ubication", auth, userController.updateUbication)
+
+router.post("/user/update-profile", auth, uploadImage.any(), userController.updateProfile)
 
 module.exports = router;

@@ -3,12 +3,12 @@ import React from 'react'
 export default function MyProfile({ user }) {
 
     return (
-        <div className="my-profile">
-            <img className="banner" src={user?.banner ? user.banner : "/api/img/default-banner.jpg"} alt="" />
+        <div className="my-profile shadow">
+            <img className="banner" src={user?.banner ? "/api/uploads/"+user.banner : "/api/img/default-banner.jpg"} alt="" />
             <div className="content">
                 <div>
                     <div>
-                        <img src={user?.profile ? user.profile : "/api/img/default-profile-picture1.jpg"} className="profile-image" alt="" />
+                        <img src={user?.profile ?"/api/uploads/" +user.profile : "/api/img/default-profile-picture1.jpg"} className="profile-image" alt="" />
                         <div className="user-data">
                             <span className="user-name">{user.name}</span>
                         </div>

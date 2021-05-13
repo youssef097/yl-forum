@@ -8,6 +8,7 @@ import Loading from '../components/Loading'
 import Post from '../components/Post'
 
 export default function PostPage(props) {
+    console.log(props);
     const [postdata, setPostdata] = useState(null)
     const [comments, setComments] = useState([])
     const [loading, setLoading] = useState(true)
@@ -69,11 +70,11 @@ export default function PostPage(props) {
                 <div className="glass">
 
                 {/* refreshComments={()=>{getComments()}} */}
-                    {loading?<Loading/>: isAuth()&&<CommentInput  postId={postdata.id}/> }
+                    {loading?<Loading/>: isAuth()&&<CommentInput myData={props.myData}  postId={postdata.id}/> }
 
                     <h3>comments</h3>
 
-                    {loading ? <Loading /> : <CommentSection postId={postdata.id} />}
+                    {loading ? <Loading /> : <CommentSection myData={props.myData} postId={postdata.id} />}
                 </div>
             </div>
             <aside>

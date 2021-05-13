@@ -14,14 +14,14 @@ export default function YourTopics({user}) {
         })        
     }, [])
     return (
-        <aside className="your-topics">
+        <aside className="your-topics shadow">
             <div>
                 {topics===null?<Loading/>:<div>
                     <div className="your-topics-header">
                         <h3>{user?"Topics you follow":"Popular Topics"}</h3>                    
                     </div>
                     <div className="your-topics-body">
-                        {topics.map((t)=>  <Link to={"/topic/"+t.id} > <Topic key={t.id} topicData={t} /></Link> )}                    
+                        {topics.map((t)=>  <Link to={"/topic/"+t.id} > <Topic  reduced={true} key={t.id} topicData={t} /></Link> )}                    
                     </div>
                     { isAuth()&&
                     <div className="your-topics-buttons">

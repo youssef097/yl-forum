@@ -22,29 +22,49 @@ export default function RegisterPage() {
                 console.log(errorMessage);
                 if (errorMessage === "ER_DUP_ENTRY") {
                     setResponse("User already exists")
-                }else if(errorMessage === "INCOMPLETE_USER_DATA") {
+                } else if (errorMessage === "INCOMPLETE_USER_DATA") {
                     setResponse("Some fields are required")
                 }
             })
     }
 
-    if(isAuth()){
-        return <Redirect  to ="/home" />
+    if (isAuth()) {
+        return <Redirect to="/home" />
     }
-    return (        
-        redirect? <Redirect to="/login" />:<div className="form-container"   >
+    return (
+        redirect ? <Redirect to="/login" /> : <div className="form-container"   >
             <form onSubmit={handleSubmit}>
-            <h2>REgister</h2>
-                Name: <input type="text" onChange={(e) => { setFormData(({ ...formData, name: e.target.value })) }} value={formData.name} /> <br />
-                Email: <input type="text" onChange={(e) => { setFormData(({ ...formData, email: e.target.value })) }} value={formData.email} /> <br />
-                Password: <input type="password" onChange={(e) => { setFormData(({ ...formData, pass: e.target.value })) }} value={formData.pass} /> <br />
-                Repeat password: <input type="password" onChange={(e) => { setFormData(({ ...formData, pass2: e.target.value })) }} value={formData.pass2} /> <br />
-                <input type="submit" value="Register" />
-            <h2>{response}</h2>
-            <pre>
-                {JSON.stringify(formData)}
-            </pre>
-            Already have an Account? <Link to="/login">Log In</Link>
+                <h2>Register</h2>
+                <div className="form-block">
+                    <label>Name:</label>
+                    <input type="text" onChange={(e) => { setFormData(({ ...formData, name: e.target.value })) }} value={formData.name} /> <br />
+                </div>
+                <div className="form-block">
+
+                    <label>Email:</label>
+                    <input type="text" onChange={(e) => { setFormData(({ ...formData, email: e.target.value })) }} value={formData.email} /> <br />
+                </div>
+                <div className="form-block">
+                    <label>Password:</label>
+                    <input type="password" onChange={(e) => { setFormData(({ ...formData, pass: e.target.value })) }} value={formData.pass} /> <br />
+                </div>
+                <div className="form-block">
+                    <label>Repeat password:</label>
+                    <input type="password" onChange={(e) => { setFormData(({ ...formData, pass2: e.target.value })) }} value={formData.pass2} /> <br />
+                </div>
+                <div className="form-block">
+                    <button type="submit">
+                        Register
+                    </button>
+
+                </div>
+
+                {/* <input type="submit" value="Register" /> */}
+                {/* <h2>{response}</h2> */}
+                {/* <pre> */}
+                    {/* {JSON.stringify(formData)} */}
+                {/* </pre> */}
+            Already have an Account? <Link to="/login" style={{fontWeight:"bold", color:"rgb(69, 69, 185)"}}>Log In</Link>
             </form>
         </div>
     )

@@ -60,7 +60,7 @@ console.log("laoded homepage");
             </aside>}
             <PostListContainer user={user} {...props}/>
             <YourTopics user = {user} />
-            <Chat/>
+            <Chat myData = {user} />
         </div >
     )
 }

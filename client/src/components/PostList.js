@@ -5,7 +5,7 @@ import { isAuth } from "../auth"
 import Loading from './Loading'
 import { Link } from 'react-router-dom'
 
-export default function PostList({ topic }) {
+export default function PostList({ topic,myData }) {
     const [posts, setPosts] = useState(null)
     useEffect(() => {
         let route = isAuth() ? "get-posts" : "explore";
@@ -22,7 +22,7 @@ export default function PostList({ topic }) {
         return (
             <div className="post-list" >
                 {posts === null ? <Loading /> : posts.length ? posts.map((p) => {
-                    return <Post postData={p}></Post>
+                    return <Post  myData = {myData} postData={p} ></Post>
                 }) : <div className="your-topics-buttons">
                     <Link to="/create-topic"> <button>Create your own topic</button></Link>
                     <span>or</span>

@@ -8,13 +8,15 @@ export default function ExplorePage(props) {
     console.log(props);
     useEffect(() => {
         axios.get("/api/topic/explore").then(({ data }) => {
+            console.log(data.topics);
             setTopics(data.topics);
         })
     }, [])
     return (
-        <div style={{ maxWidth: "799px", margin: "auto", paddingTop: "3rem" }}>
-            <h2>trending Topics</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: "1fr 1fr 1fr", gap: "1em" }} >
+        <div className="shadow " style={{ maxWidth: "799px", margin: "auto", paddingTop: "3rem" }}>
+            <div className="explore-topic-list">
+                <h2>trending Topics</h2>
+
                 {topics.map((t) => <Topic {...props} topicData={t} />)}
             </div>
         </div>
